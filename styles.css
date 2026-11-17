@@ -29,9 +29,10 @@ body {
 }
 
 .container {
-  max-width: 1060px;
+  width: 100%;
+  max-width: min(92vw, 1480px);
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 clamp(20px, 4vw, 64px);
 }
 
 .divider {
@@ -60,9 +61,10 @@ body {
 }
 
 .header-inner {
-  max-width: 1060px;
+  width: 100%;
+  max-width: min(92vw, 1480px);
   margin: 0 auto;
-  padding: 18px 24px;
+  padding: 18px clamp(20px, 4vw, 64px);
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -118,8 +120,8 @@ body {
 /* Hero Section */
 .hero {
   display: grid;
-  grid-template-columns: 1.25fr 0.75fr;
-  gap: 52px;
+  grid-template-columns: 1.35fr 0.65fr;
+  gap: clamp(32px, 5vw, 72px);
   padding: 60px 0 68px;
   align-items: center;
 }
@@ -529,7 +531,7 @@ details.role-item[open] .role-plus {
 .projects-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
-  gap: 44px 36px;
+  gap: clamp(28px, 3.5vw, 48px);
   width: 100%;
   padding-bottom: 76px;
 }
@@ -551,7 +553,7 @@ details.role-item[open] .role-plus {
 }
 
 .square-tile {
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 4 / 3; /* Slightly wider than 1:1 so tiles don't get overly tall on wide screens */
   width: 100%;
   background: var(--sage);
   border: 1px solid var(--border);
