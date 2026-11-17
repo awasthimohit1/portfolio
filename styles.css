@@ -30,9 +30,9 @@ body {
 
 .container {
   width: 100%;
-  max-width: 1680px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: 0 clamp(20px, 4.5vw, 72px);
+  padding: 0 clamp(16px, 2.5vw, 40px);
 }
 
 .divider {
@@ -62,9 +62,9 @@ body {
 
 .header-inner {
   width: 100%;
-  max-width: 1680px;
+  max-width: 100%;
   margin: 0 auto;
-  padding: clamp(14px, 1.8vw, 22px) clamp(20px, 4.5vw, 72px);
+  padding: 16px clamp(16px, 2.5vw, 40px);
   display: flex;
   justify-content: space-between;
   align-items: center;
