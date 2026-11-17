@@ -103,14 +103,38 @@ if (modal && modalCta) {
 
 const contactForm = document.getElementById('quickContactForm');
 if (contactForm) {
-  contactForm.addEventListener('submit', function (e) {
+  contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
-    const name = document.getElementById('senderName').value.trim();
-    const email = document.getElementById('senderEmail').value.trim();
-    const message = document.getElementById('senderMessage').value.trim();
-    const subject = encodeURIComponent(`Portfolio Inquiry from ${name}`);
-    const body = encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\n${message}`);
-    document.getElementById('formStatus').textContent = 'Opening email draft...';
-    window.location.href = `mailto:awasthimohit15@gmail.com?subject=${subject}&body=${body}`;
+    const statusEl = document.getElementById('formStatus');
+    const submitBtn = document.getElementById('submitBtn');
+    const formData = new FormData(contactForm);
+
+    // Paste your free key from web3forms.com below
+    formData.append('access_key', '795cdde4-486d-45fe-9db2-88bd4ab6f5b7');
+    formData.append('subject', `Portfolio Inquiry from ${formData.get('name')}`);
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Sending...';
+    statusEl.textContent = 'Sending your message...';
+
+    try {
+      const response = await fetch('https://api.web3forms.com/submit', {
+        method: 'POST',
+        body: formData
+      });
+      const result = await response.json();
+
+      if (result.success) {
+        statusEl.textContent = 'Message sent! I will get back to you soon.';
+        contactForm.reset();
+      } else {
+        statusEl.textContent = 'Something went wrong. Please email awasthimohit15@gmail.com directly.';
+      }
+    } catch (error) {
+      statusEl.textContent = 'Network error. Please email awasthimohit15@gmail.com directly.';
+    } finally {
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Send Message →';
+    }
   });
 }
