@@ -106,35 +106,46 @@ if (contactForm) {
   contactForm.addEventListener('submit', async function (e) {
     e.preventDefault();
     const statusEl = document.getElementById('formStatus');
-    const submitBtn = document.getElementById('submitBtn');
-    const formData = new FormData(contactForm);
+    const submitBtn = contactForm.querySelector('button[type="submit"]');
 
-    // Paste your free key from web3forms.com below
-    formData.append('access_key', '795cdde4-486d-45fe-9db2-88bd4ab6f5b7');
-    formData.append('subject', `Portfolio Inquiry from ${formData.get('name')}`);
+    const payload = {
+      access_key: 'PASTE_YOUR_REAL_WEB3FORMS_KEY_HERE',
+      subject: `Portfolio Inquiry from ${document.getElementById('senderName').value.trim()}`,
+      name: document.getElementById('senderName').value.trim(),
+      email: document.getElementById('senderEmail').value.trim(),
+      message: document.getElementById('senderMessage').value.trim()
+    };
 
-    submitBtn.disabled = true;
-    submitBtn.textContent = 'Sending...';
-    statusEl.textContent = 'Sending your message...';
+    if (submitBtn) {
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Sending...';
+    }
+    if (statusEl) statusEl.textContent = 'Sending your message...';
 
     try {
       const response = await fetch('https://api.web3forms.com/submit', {
         method: 'POST',
-        body: formData
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(payload)
       });
       const result = await response.json();
 
       if (result.success) {
-        statusEl.textContent = 'Message sent! I will get back to you soon.';
+        if (statusEl) statusEl.textContent = 'Message sent! I will get back to you soon.';
         contactForm.reset();
       } else {
-        statusEl.textContent = 'Something went wrong. Please email awasthimohit15@gmail.com directly.';
+        if (statusEl) statusEl.textContent = `Error: ${result.message || 'Check your Web3Forms access key.'}`;
       }
     } catch (error) {
-      statusEl.textContent = 'Network error. Please email awasthimohit15@gmail.com directly.';
+      if (statusEl) statusEl.textContent = 'Network blocked (check ad-blocker) or email awasthimohit15@gmail.com directly.';
     } finally {
-      submitBtn.disabled = false;
-      submitBtn.textContent = 'Send Message →';
+      if (submitBtn) {
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Send Message →';
+      }
     }
   });
 }
