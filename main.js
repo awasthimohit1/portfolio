@@ -109,7 +109,7 @@ if (contactForm) {
     const submitBtn = contactForm.querySelector('button[type="submit"]');
 
     const payload = {
-      access_key: 'PASTE_YOUR_REAL_WEB3FORMS_KEY_HERE',
+      access_key: '795cdde4-486d-45fe-9db2-88bd4ab6f5b7',
       subject: `Portfolio Inquiry from ${document.getElementById('senderName').value.trim()}`,
       name: document.getElementById('senderName').value.trim(),
       email: document.getElementById('senderEmail').value.trim(),
