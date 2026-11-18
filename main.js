@@ -8,7 +8,7 @@ const studies = [
     tags: 'Stack: Python · Pydantic · ChromaDB · FAISS · GitHub Actions',
     ctaText: 'View on GitHub ↗',
     // Replace with your direct AI Summarizer repository URL when ready
-    ctaHref: 'https://github.com/awasthimohit1',
+    ctaHref: 'https://github.com/awasthimohit1/ai_summarizer',
     external: true
   },
   {
