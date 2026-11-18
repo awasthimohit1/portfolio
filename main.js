@@ -149,3 +149,20 @@ if (contactForm) {
     }
   });
 }
+
+const themeButtons = document.querySelectorAll('.theme-opt');
+
+function applyTheme(theme) {
+  document.documentElement.setAttribute('data-theme', theme);
+  localStorage.setItem('theme', theme);
+  themeButtons.forEach(btn => {
+    btn.classList.toggle('active', btn.dataset.themeVal === theme);
+  });
+}
+
+// Always default to 'light' unless the user previously picked 'dark'
+applyTheme(localStorage.getItem('theme') || 'light');
+
+themeButtons.forEach(btn => {
+  btn.addEventListener('click', () => applyTheme(btn.dataset.themeVal));
+});

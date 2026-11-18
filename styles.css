@@ -13,6 +13,46 @@
   --serif: 'Instrument Serif', Georgia, serif;
 }
 
+[data-theme="dark"] {
+  --bg: #141211;
+  --surface: #1E1B19;
+  --surface-hover: #282421;
+  --sage: #251F1D;
+  --sage-hover: #302825;
+  --ink: #F5F2EE;
+  --ink-muted: #A8A29E;
+  --accent: #E58B6F;
+  --border: #36312E;
+}
+
+.site-header {
+  background-color: color-mix(in srgb, var(--bg) 90%, transparent);
+}
+
+.theme-switch {
+  display: inline-flex;
+  border: 1px solid var(--border);
+  background: var(--surface);
+}
+
+.theme-opt {
+  background: transparent;
+  border: none;
+  color: var(--ink-muted);
+  font-family: var(--mono);
+  font-size: 10.5px;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  padding: 5px 9px;
+  cursor: pointer;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.theme-opt.active {
+  background: var(--ink);
+  color: var(--bg);
+}
+
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
 html {
