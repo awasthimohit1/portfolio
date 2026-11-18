@@ -1,5 +1,6 @@
 :root {
   --bg: #FBFAF8;
+  --header-bg: rgba(251, 250, 248, 0.92);
   --surface: #F2F2F2;
   --surface-hover: #EAE6E3;
   --sage: #ECE2DC;
@@ -15,6 +16,7 @@
 
 [data-theme="dark"] {
   --bg: #141211;
+  --header-bg: rgba(20, 18, 17, 0.92);
   --surface: #1E1B19;
   --surface-hover: #282421;
   --sage: #251F1D;
@@ -29,29 +31,32 @@
   background-color: color-mix(in srgb, var(--bg) 90%, transparent);
 }
 
-.theme-switch {
+.theme-toggle {
   display: inline-flex;
-  border: 1px solid var(--border);
+  align-items: center;
+  justify-content: center;
+  width: 34px;
+  height: 34px;
   background: var(--surface);
-}
-
-.theme-opt {
-  background: transparent;
-  border: none;
-  color: var(--ink-muted);
-  font-family: var(--mono);
-  font-size: 10.5px;
-  text-transform: uppercase;
-  letter-spacing: 0.06em;
-  padding: 5px 9px;
+  border: 1px solid var(--border);
+  color: var(--ink);
   cursor: pointer;
-  transition: background-color 0.2s ease, color 0.2s ease;
+  transition: border-color 0.2s ease, color 0.2s ease, transform 0.2s ease;
 }
 
-.theme-opt.active {
-  background: var(--ink);
-  color: var(--bg);
+.theme-toggle:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
 }
+
+/* Light mode (default): show crescent moon, hide sun */
+.theme-toggle .icon-sun { display: none; }
+.theme-toggle .icon-moon { display: block; }
+
+/* Dark mode: show sun, hide crescent moon */
+[data-theme="dark"] .theme-toggle .icon-moon { display: none; }
+[data-theme="dark"] .theme-toggle .icon-sun { display: block; }
 
 * { box-sizing: border-box; margin: 0; padding: 0; }
 
@@ -94,10 +99,11 @@ body {
   position: sticky;
   top: 0;
   z-index: 50;
-  background-color: rgba(251, 250, 248, 0.92);
+  background-color: var(--header-bg);
   backdrop-filter: blur(8px);
   -webkit-backdrop-filter: blur(8px);
   border-bottom: 1px solid var(--border);
+  transition: background-color 0.25s ease, border-color 0.25s ease;
 }
 
 .header-inner {

@@ -150,19 +150,25 @@ if (contactForm) {
   });
 }
 
-const themeButtons = document.querySelectorAll('.theme-opt');
+const themeToggle = document.getElementById('themeToggle');
 
 function applyTheme(theme) {
   document.documentElement.setAttribute('data-theme', theme);
   localStorage.setItem('theme', theme);
-  themeButtons.forEach(btn => {
-    btn.classList.toggle('active', btn.dataset.themeVal === theme);
-  });
+  if (themeToggle) {
+    themeToggle.setAttribute(
+      'aria-label',
+      theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'
+    );
+  }
 }
 
-// Always default to 'light' unless the user previously picked 'dark'
+// Default to light mode unless dark was previously selected
 applyTheme(localStorage.getItem('theme') || 'light');
 
-themeButtons.forEach(btn => {
-  btn.addEventListener('click', () => applyTheme(btn.dataset.themeVal));
-});
+if (themeToggle) {
+  themeToggle.addEventListener('click', () => {
+    const current = document.documentElement.getAttribute('data-theme');
+    applyTheme(current === 'dark' ? 'light' : 'dark');
+  });
+}
